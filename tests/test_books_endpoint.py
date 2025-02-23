@@ -24,7 +24,7 @@ def test_create_book(test_app: TestClient) -> None:
 
 
 def test_create_horror_book(test_app: TestClient) -> None:
-    """Test that book with genre == 'horror' can be created."""
+    """Test that book with genre == 'horror' can't be created."""
     # Arrange
     book = {
         "title": "Fifty Shades of Grey 4",
@@ -45,9 +45,9 @@ def test_get_all_books(test_app: TestClient) -> None:
     """
     Test get books endpoint.
 
-    Check that get /books
-    - returns books grouped by genre and with count of bools in that genre
-    - returnes censored titles for genre 18+
+    Check that get books:
+    - returns books grouped by genre and with count of books in that genre.
+    - returns censored titles for genre 18+.
     """
     # Arrange
     book = {
@@ -91,11 +91,7 @@ def test_get_all_books(test_app: TestClient) -> None:
 
 
 def test_get_all_books_no_books(test_app: TestClient) -> None:
-    """
-    Test get books endpoint.
-
-    Check when no books exist.
-    """
+    """Test get books endpoint when no books exist."""
     # Act
     response = test_app.get("/api/v1/books")
 
@@ -172,7 +168,7 @@ def test_update_books_only_one_exists(test_app: TestClient) -> None:
 
 
 def test_delete_book(test_app: TestClient) -> None:
-    """Test delete book endpoint when book is not the last book of a genre."""
+    """Test delete book endpoint when the book is not the last book of a genre."""
     # Arrange
     book = {
         "title": "Fifty Shades of Grey 4",
@@ -204,7 +200,7 @@ def test_delete_book(test_app: TestClient) -> None:
 
 
 def test_delete_last_genre_book(test_app: TestClient) -> None:
-    """Test delete book endpoint when book is the last book of a genre."""
+    """Test delete book endpoint when the book is the last book of a genre."""
     # Arrange
     book = {
         "title": "Fifty Shades of Grey 4",

@@ -23,8 +23,6 @@
 				"ms-python.python",
 				"ms-python.vscode-pylance",
 				"steoates.autoimport",
-				"nucllear.vscode-extension-auto-import",
-				"dbaeumer.vscode-eslint",
 				"xyz.local-history",
 				"charliermarsh.ruff"
 			]
