@@ -5,7 +5,8 @@
       "name": "Python: app",
       "type": "python",
       "request": "launch",
-      "program": "C:\\Users\\VKholomeniuk\\OneDrive - ACT Commodities\\My Documents\\sql\\main.py",
+      "cwd": "${workspaceFolder}",
+      "program": "${workspaceFolder}/main.py",
       "console": "integratedTerminal",
       "justMyCode": true
     }
