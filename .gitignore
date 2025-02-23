@@ -1,0 +1,27 @@
+# Python Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+mypy-report.xml
+.history/
+.ruff_cache/
+.pytest_cache/
+
+*/__pycache__/*

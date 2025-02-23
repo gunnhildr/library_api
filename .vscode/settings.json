@@ -1,0 +1,24 @@
+{
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.typeCheckingMode": "standard",
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit",
+            "source.fixAll": "always"
+        },
+    },
+    "python.testing.pytestArgs": [
+        "/home/site/"
+    ],
+    "python.testing.pytestEnabled": true,
+    "debug.internalConsoleOptions": "neverOpen",
+    "python.analysis.autoSearchPaths": true,
+    "python.analysis.extraPaths": [],
+    "editor.formatOnPaste": false,
+    "editor.formatOnType": false,
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file",
+    "files.autoSave": "onFocusChange",
+}

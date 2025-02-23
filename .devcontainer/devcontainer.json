@@ -1,0 +1,34 @@
+{
+	"name": "Library Api",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "api",
+	"remoteUser": "root",
+	"workspaceFolder": "/home/site",
+	"remoteEnv": {
+		"LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+	},
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"terminal.integrated.profiles.linux": {
+					"bash": {
+						"path": "/bin/bash",
+						"args": []
+					}
+				},
+				"terminal.integrated.defaultProfile.linux": "bash"
+			},
+			"extensions": [
+				"ms-azuretools.vscode-docker",
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"steoates.autoimport",
+				"nucllear.vscode-extension-auto-import",
+				"dbaeumer.vscode-eslint",
+				"xyz.local-history",
+				"charliermarsh.ruff"
+			]
+		}
+	},
+	"postCreateCommand": "pip install -r requirements.txt"
+}
