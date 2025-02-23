@@ -3,7 +3,7 @@ from typing import List
 from sqlalchemy import and_, func, not_
 from sqlalchemy.orm import Session
 
-from models.book import BookModel
+from models.book import Book
 from schemas.book import BooksWithGenres, CensoredBook
 
 
@@ -23,7 +23,7 @@ def db_update(db: Session, data) -> int:
 
     : param data: data to update.
     """
-    result = db.query(BookModel).filter(BookModel.id == data.id).update(data.model_dump())
+    result = db.query(Book).filter(Book.id == data.id).update(data.model_dump())
     db.commit()
 
     return result
@@ -37,10 +37,10 @@ def db_get_censored(db: Session) -> List[BooksWithGenres]:
     """
     result: BooksWithGenres = []
 
-    genres = (db.query(BookModel.genre, func.count().label("count")).group_by(BookModel.genre).order_by(BookModel.genre)).all()
+    genres = (db.query(Book.genre, func.count().label("count")).group_by(Book.genre).order_by(Book.genre)).all()
 
     for genre in genres:
-        books = db.query(BookModel).filter(BookModel.genre == genre[0]).all()
+        books = db.query(Book).filter(Book.genre == genre[0]).all()
 
         aggregated_books = BooksWithGenres(
             genre=genre[0],
@@ -52,25 +52,25 @@ def db_get_censored(db: Session) -> List[BooksWithGenres]:
     return result
 
 
-def db_get_by_ids(db: Session, ids: List[int]) -> List[BookModel]:
+def db_get_by_ids(db: Session, ids: List[int]) -> List[Book]:
     """
     Get books by ID.
 
     :param ids: list if IDs.
     """
-    return db.query(BookModel).filter(BookModel.id.in_(ids)).all()
+    return db.query(Book).filter(Book.id.in_(ids)).all()
 
 
-def db_get_by_id(db: Session, _id: int) -> BookModel:
+def db_get_by_id(db: Session, _id: int) -> Book:
     """
     Get book by ID.
 
     :param _id: book ID.
     """
-    return db.query(BookModel).filter(BookModel.id == _id).first()
+    return db.query(Book).filter(Book.id == _id).first()
 
 
-def db_search(db: Session, title: str = None, author: str = None) -> List[BookModel]:
+def db_search(db: Session, title: str = None, author: str = None) -> List[Book]:
     """
     Endpoint to search for Books by Title or Author.
 
@@ -82,12 +82,12 @@ def db_search(db: Session, title: str = None, author: str = None) -> List[BookMo
     :param author: author of the book.
     """
     filters = and_(
-        func.lower(BookModel.title).contains(title.lower()) if title else True,
-        func.lower(BookModel.author).contains(author.lower()) if author else True,
-        not_((BookModel.genre).contains("18+")),
+        func.lower(Book.title).contains(title.lower()) if title else True,
+        func.lower(Book.author).contains(author.lower()) if author else True,
+        not_((Book.genre).contains("18+")),
     )
 
-    return db.query(BookModel).filter(filters).all()
+    return db.query(Book).filter(filters).all()
 
 
 def db_delete(db: Session, _id: int) -> None:
@@ -96,5 +96,5 @@ def db_delete(db: Session, _id: int) -> None:
 
     :param _id: book ID.
     """
-    db.query(BookModel).filter(BookModel.id == _id).delete()
+    db.query(Book).filter(Book.id == _id).delete()
     db.commit()

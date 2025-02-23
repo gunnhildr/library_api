@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
 
-class BookModel(Base):
+class Book(Base):
     """Database model for book."""
 
     __tablename__ = "books"

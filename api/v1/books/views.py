@@ -7,14 +7,14 @@ from sqlalchemy.orm import Session
 
 from database.config import get_db
 from database.crud.books import db_delete, db_get_by_id, db_get_by_ids, db_get_censored, db_insert, db_search, db_update
-from models.book import BookModel
-from schemas.book import Book, BookCreate, BooksWithGenres
+from models.book import Book
+from schemas.book import BookGet, BookCreate, BooksWithGenres
 from utils.logger import logger
 
 router = APIRouter()
 
 
-@router.post("/", response_model=Book, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=BookGet, status_code=status.HTTP_201_CREATED)
 async def create_book(book: BookCreate = Body(...), db: Session = Depends(get_db)):
     """Endpoint to add a New Book. Books with the genre "Horror" cannot be added."""
     logger.info(f"Creating a book {book!s}")
@@ -26,7 +26,7 @@ async def create_book(book: BookCreate = Body(...), db: Session = Depends(get_db
             },
             status_code=status.HTTP_400_BAD_REQUEST,
         )
-    db_book = BookModel(**book.model_dump())
+    db_book = Book(**book.model_dump())
     db_insert(db, db_book)
     return db_book
 
@@ -52,8 +52,8 @@ async def get_all_books(db: Session = Depends(get_db)):
     return paginate(db_books_result)
 
 
-@router.put("/", response_model=List[Book], status_code=status.HTTP_200_OK)
-async def update_books(books: List[Book] = Body(...), db: Session = Depends(get_db)):
+@router.put("/", response_model=List[BookGet], status_code=status.HTTP_200_OK)
+async def update_books(books: List[BookGet] = Body(...), db: Session = Depends(get_db)):
     """
     Endpoint to update books by IDs. Supports multiple books at once.
 
@@ -94,7 +94,7 @@ async def delete_book(book_id: int, db: Session = Depends(get_db)):
             status_code=status.HTTP_404_NOT_FOUND,
         )
 
-    count = db.query(BookModel).filter(BookModel.genre == db_book.genre).count()
+    count = db.query(Book).filter(Book.genre == db_book.genre).count()
 
     if count == 1:
         return JSONResponse(
@@ -105,7 +105,7 @@ async def delete_book(book_id: int, db: Session = Depends(get_db)):
     db_delete(db, db_book.id)  # type: ignore # noqa: RET503
 
 
-@router.get("/search", response_model=Page[Book])
+@router.get("/search", response_model=Page[BookGet])
 async def search_books(title: str = "", author: str = "", db: Session = Depends(get_db)):
     """
     Endpoint to search for Books by Title or Author.

@@ -12,7 +12,7 @@ class BookCreate(BaseModel):
     genre: str
 
 
-class Book(BookCreate):
+class BookGet(BookCreate):
     """Book pydantic model."""
 
     id: int

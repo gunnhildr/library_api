@@ -3,7 +3,7 @@ import json
 from fastapi import status
 from fastapi.testclient import TestClient
 
-from schemas.book import Book, BooksWithGenres
+from schemas.book import BookGet, BooksWithGenres
 
 
 def test_create_book(test_app: TestClient) -> None:
@@ -128,7 +128,7 @@ def test_update_books(test_app: TestClient) -> None:
     assert response.status_code == status.HTTP_200_OK
 
     response = json.loads(response.content)
-    response = [Book(**item) for item in response]
+    response = [BookGet(**item) for item in response]
 
     # Assert
     assert len(response) == 2
@@ -253,7 +253,7 @@ def test_search_two_books_author(test_app: TestClient) -> None:
     assert response.status_code == status.HTTP_200_OK
 
     response = json.loads(response.content)
-    response = [Book(**item) for item in response.get("items")]
+    response = [BookGet(**item) for item in response.get("items")]
     assert len(response) == 2
 
 
@@ -282,7 +282,7 @@ def test_search_one_book_author(test_app: TestClient) -> None:
     assert response.status_code == status.HTTP_200_OK
 
     response = json.loads(response.content)
-    response = [Book(**item) for item in response.get("items")]
+    response = [BookGet(**item) for item in response.get("items")]
     assert len(response) == 1
     assert response[0].title == "Forty Shades of Grey 7"
 
@@ -312,7 +312,7 @@ def test_search_one_book_author_and_title(test_app: TestClient) -> None:
     assert response.status_code == status.HTTP_200_OK
 
     response = json.loads(response.content)
-    response = [Book(**item) for item in response.get("items")]
+    response = [BookGet(**item) for item in response.get("items")]
     assert len(response) == 1
     assert response[0].title == "Fifty Shades of Grey 4"
 
