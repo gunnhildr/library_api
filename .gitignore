@@ -26,3 +26,5 @@ mypy-report.xml
 
 __pycache__/
 **/__pycache__/
+
+testlibrary.db

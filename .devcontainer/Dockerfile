@@ -5,3 +5,5 @@ ENV PYTHONPATH=/home/site
 
 RUN apt-get update && \
     apt-get upgrade -y 
+
+EXPOSE 8081

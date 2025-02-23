@@ -13,5 +13,3 @@ services:
     tty: true
     environment:
       - DATABASE_URL
-    ports:
-      - "8081:8081"
