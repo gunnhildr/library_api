@@ -34,14 +34,6 @@ class LogConfig(BaseModel):
             "handlers": ["console"],
             "level": logging.INFO,
         },
-        # "uvicorn.error": {
-        #     "handlers": ["console"],
-        #     "level": logging.DEBUG,
-        # },
-        # "uvicorn.access": {
-        #     "handlers": ["console"],
-        #     "level": logging.DEBUG,
-        # },
     }
 
 
