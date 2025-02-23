@@ -6,7 +6,7 @@ from api.v1.router import api_router
 from utils.logger import log_config
 
 app = FastAPI()
-app.include_router(api_router, prefix="/api/v1")
+app.include_router(api_router, prefix="/api")
 add_pagination(app)
 
 disable_installed_extensions_check()

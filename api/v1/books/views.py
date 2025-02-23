@@ -8,10 +8,10 @@ from sqlalchemy.orm import Session
 from database.config import get_db
 from database.crud.books import db_delete, db_get_by_id, db_get_by_ids, db_get_censored, db_insert, db_search, db_update
 from models.book import Book
-from schemas.book import BookGet, BookCreate, BooksWithGenres
+from schemas.book import BookCreate, BookGet, BooksWithGenres
 from utils.logger import logger
 
-router = APIRouter()
+router = APIRouter(prefix="/books")
 
 
 @router.post("/", response_model=BookGet, status_code=status.HTTP_201_CREATED)
