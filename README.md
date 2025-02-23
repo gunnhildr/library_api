@@ -15,7 +15,7 @@ API for managing a library of books. The API provides functionality to manage a 
 1. Install and configure docker and vscode: https://code.visualstudio.com/docs/containers/overview
 2. Open in devcontainers. See https://code.visualstudio.com/docs/devcontainers/containers for more info.
 3. In terminal: `uvicorn main:app --port 8081 --reload`. 
-4. App will be running on http://127.0.0.1:8081/ and will reload on file change. Swagger available on http://127.0.0.1:8081/docs.
+4. App will be running on `localhost:8081` and will reload on file change. Swagger available on `localhost:8081/docs`.
 5. (Optional) Run db_script.py to get some data in the DB.
 
 
